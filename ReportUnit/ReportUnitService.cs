@@ -26,12 +26,12 @@ namespace ReportUnit
         public void CreateReport(string input, string outputDirectory)
         {
     		var attributes = File.GetAttributes(input);
-		IEnumerable<FileInfo> filePathList;
+		    IEnumerable<FileInfo> filePathList;
 
-        	 if ((FileAttributes.Directory & attributes) == FileAttributes.Directory)
+        	if ((FileAttributes.Directory & attributes) == FileAttributes.Directory)
         	{
 				filePathList = new DirectoryInfo(input).GetFiles("*.xml", SearchOption.AllDirectories)
-					.OrderByDescending(f => f.CreationTime);
+					.OrderBy(f => f.CreationTime);
 	        }
 	        else
 	        {
@@ -58,9 +58,17 @@ namespace ReportUnit
             if (compositeTemplate.ReportList.Count > 1)
             {
                 compositeTemplate.SideNavLinks = compositeTemplate.SideNavLinks.Insert(0, Templates.SideNav.IndexLink);
+                compositeTemplate.SideNavLinks = compositeTemplate.SideNavLinks.Insert(0, Templates.SideNav.SummaryLink);
 
-                string summary = Engine.Razor.RunCompile(Templates.Summary.GetSource(), "summary", typeof(Model.CompositeTemplate), compositeTemplate, null);
-                File.WriteAllText(Path.Combine(outputDirectory, "Index.html"), summary);
+                string index = Engine.Razor.RunCompile(Templates.Summary.GetSource(), "index", typeof(Model.CompositeTemplate), compositeTemplate, null);
+                File.WriteAllText(Path.Combine(outputDirectory, "Index.ejs"), index);
+                //compositeTemplate.ReportList.SelectMany(result => result.TestSuiteList,
+                //                                                           (report, testResult) => new {
+                //                                                               report.FileName,
+                //                                                               testResult.Status
+                //                                                           });
+                string summary = Engine.Razor.RunCompile(Templates.Reports.GetSource(), "summary", typeof(CompositeTemplate), compositeTemplate);
+                File.WriteAllText(Path.Combine(outputDirectory, "Summary.ejs"), summary);
             }
 
 			foreach (var report in compositeTemplate.ReportList)
@@ -68,7 +76,7 @@ namespace ReportUnit
                 report.SideNavLinks = compositeTemplate.SideNavLinks;
 
                 var html = Engine.Razor.RunCompile(Templates.File.GetSource(), "report", typeof(Model.Report), report, null);
-                File.WriteAllText(Path.Combine(outputDirectory, report.FileName + ".html"), html);
+                File.WriteAllText(Path.Combine(outputDirectory, report.FileName + ".ejs"), html);
             }
         }
 

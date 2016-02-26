@@ -53,7 +53,7 @@ namespace ReportUnit.Templates
 
                             <ul class='right nav-right'>
                                 <li class='nav-item'>
-                                    <a class='modal-trigger waves-effect waves-light run-info-icon tooltipped' data-position='bottom' data-tooltip='Run Info' href='#modal1'><i class='mdi-action-info-outline'></i></a>
+                                    <a class='modal-trigger waves-effect waves-light run-info-icon tooltipped' data-position='bottom' data-tooltip='Run Info' href='#dynamicModal'><i class='mdi-action-info-outline'></i></a>
                                 </li>
                                 <!-- <div class='nav-item'>
                                     <a class='modal-trigger waves-effect waves-light console-logs-icon tooltipped' data-position='bottom' data-tooltip='Console Logs' href='#modal2'><i class='mdi-action-assignment'></i></a>
@@ -319,7 +319,7 @@ namespace ReportUnit.Templates
                         <div class='hidden total-errors'><!--%ERRORS%--></div>
                         <div class='hidden total-skipped'><!--%SKIPPED%--></div>
                     </div>
-                    <div id='dynamicModal' class='modal modal-trigger' in_duration='0' induration='0'>
+                    <div id='dynamicModal' class='modal'>
                         <div class='modal-content'>
                             <h4></h4>
                             <pre></pre>

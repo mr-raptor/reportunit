@@ -125,7 +125,7 @@ namespace ReportUnit.Templates
                                                 @for (int ix = 0; ix < Model.ReportList.Count; ix++)
                                                 {
                                                     <tr>
-                                                        <td><a href='./@(Model.ReportList[ix].FileName).html'>@Model.ReportList[ix].FileName</a></td>
+                                                        <td><a href='./@(Model.ReportList[ix].FileName)'>@Model.ReportList[ix].FileName</a></td>
                                                         <td>@Model.ReportList[ix].TestRunner</td>
                                                         <td>@Model.ReportList[ix].Total</td>
                                                         <td>@Model.ReportList[ix].Passed</td>

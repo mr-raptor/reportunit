@@ -1,6 +1,6 @@
 var menuWidth = 260;
 
-function showDynamicModal(heading, content) {
+/*function showDynamicModal(heading, content) {
     var m = $('#dynamicModal');
     m.find('h4').text(heading);
     m.find('pre').text(content);
@@ -21,7 +21,7 @@ $('.details-container').click(function(evt) {
     if (t.is('.showDescription')) {
         showDynamicModal(t.text() + ' Description', t.next().text());
     }
-});
+});*/
 
 /* toggle dashboard on 'Enable Dashboard' click */
 $('#enableDashboard').click(function() {
@@ -135,7 +135,9 @@ function clickListItem(listClass, index) {
 $(document).ready(function() {
 	/* init */
 	$('select').material_select();
-	$('.modal-trigger').leanModal();
+	$('.modal-trigger').leanModal({
+		in_duration: 0,
+	});
 	$('.tooltipped').tooltip({delay: 10});
 
 	/* for a single report item, hide sidenav */
