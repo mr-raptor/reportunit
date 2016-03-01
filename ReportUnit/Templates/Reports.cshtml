@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang='en'>
 
 <head>
@@ -85,6 +85,7 @@
                         <table class='table bordered'>
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Fixture</th>
                                     <th>Test</th>
                                     <th>Phase 1</th>
@@ -92,9 +93,11 @@
                                     <th>Phase 3</th>
                                 </tr>
                             </thead>
+                            @{ var i = 1; }
                             <tbody>
                                 @foreach (var testInfo in Model.TestInfo) {
                                     <tr>
+                                        <td>@(i++)</td>
                                         <td>@testInfo.Fixture</td>
                                         <td class="name">@testInfo.Name</td>
 
@@ -107,10 +110,6 @@
                                                 {
                                                     <div class='badge showStatusMessage error'><i class='mdi-alert-warning'></i></div>
                                                     <pre class='hide statusMsg'>@status.Message</pre>
-                                                }
-                                                else
-                                                {
-                                                    <td class='grey lighten-4'></td>
                                                 }
                                             </td>
                                         }

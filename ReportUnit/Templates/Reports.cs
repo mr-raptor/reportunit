@@ -1,4 +1,5 @@
 ﻿using RazorEngine.Templating;
+using ReportUnit.Properties;
 
 namespace ReportUnit.Templates
 {
@@ -6,7 +7,7 @@ namespace ReportUnit.Templates
     {
         public static string GetSource()
         {
-            return System.IO.File.ReadAllText(@"C:\cygwin64\home\Admin\reportunit\ReportUnit\Templates\Reports.cshtml").Replace("\r\n", "").Replace("\t", "").Replace("    ", "");
+            return System.Text.Encoding.UTF8.GetString(Resources.Reports);//.Replace("\r\n", "").Replace("\t", "").Replace("    ", "");
         }
     }
 }
