@@ -31,6 +31,14 @@ namespace ReportUnit.Model
         /// </summary>
         public double Duration { get; set; }
 
+        public TimeSpan DurationTime
+        {
+            get
+            {
+                return new TimeSpan(0, 0, Convert.ToInt32(Math.Floor(Duration)));
+            }
+        }
+
         /// <summary>
         /// Categories & features associated with the test
         /// </summary>

@@ -14,6 +14,7 @@ using RazorEngine.Text;
 using ReportUnit.Model;
 using ReportUnit.Utils;
 using ReportUnit.Logging;
+using System.Globalization;
 
 namespace ReportUnit.Parser
 {
@@ -162,6 +163,10 @@ namespace ReportUnit.Parser
                         tc.Attribute("end-time") != null 
                             ? tc.Attribute("end-time").Value 
                             : "";
+                    test.Duration =
+                        tc.Attribute("duration") != null
+                            ? double.Parse(tc.Attribute("duration").Value, CultureInfo.InvariantCulture)
+                            : 0;
 
                     // description
                     var description = 

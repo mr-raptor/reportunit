@@ -210,6 +210,7 @@ namespace ReportUnit.Templates
                                                                         {
                                                                             <th>StatusMessage</th>
                                                                         }
+                                                                        <th>Duration</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -260,6 +261,7 @@ namespace ReportUnit.Templates
                                                                                     <td class='grey lighten-4'></td>
                                                                                 }
                                                                             }
+                                                                            <td>@test.DurationTime</td>
                                                                             <td class='test-features hide @test.GetCategories()'></td>
                                                                         </tr>
                                                                     }

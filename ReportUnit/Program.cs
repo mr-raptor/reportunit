@@ -43,14 +43,11 @@ namespace ReportUnit
         /// </param>
         static void Main(string[] args)
         {
-            args = new string[] { "C:/cygwin64/home/Admin/testrunner/testResultsXml","C:/cygwin64/home/Admin/testrunner/views/testResults" };
-
             CopyrightMessage();
 
             if (args.Length == 0 || args.Length > 2)
             {
-                _logger.Error("Invalid number of arguments specified.\n" + USAGE);
-                return;
+                args = new string[] { "C:/cygwin64/home/Admin/testrunner/testResultsXml", "C:/cygwin64/home/Admin/testrunner/views/testResults" };
             }
 
             foreach (string arg in args)
