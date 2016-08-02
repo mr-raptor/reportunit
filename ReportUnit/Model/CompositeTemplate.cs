@@ -34,7 +34,9 @@ namespace ReportUnit.Model
                         (testSuite, test) => new TestInfo()
                         {
                             Name = test.Name,
+                            FullName = test.FullName,
                             Fixture = testSuite.Name,
+                            Description = test.Description,
                             Statuses = new List<StatusInfo>()
                             {
                                 new StatusInfo()
@@ -50,13 +52,14 @@ namespace ReportUnit.Model
                         (testSuite, test) => new
                         {
                             Name = test.Name,
+                            FullName = test.FullName,
                             Fixture = testSuite.Name,
                             Status = test.Status.ToString(),
                             Message = test.StatusMessage
                         });
                     foreach (var test in _mergedTests)
                     {
-                        var item = list.FirstOrDefault(l => l.Name == test.Name && l.Fixture == test.Fixture);
+                        var item = list.FirstOrDefault(l => l.FullName == test.FullName && l.Fixture == test.Fixture);
                         if (item != null)
                         {
                             test.Statuses.Add(new StatusInfo()
@@ -67,15 +70,6 @@ namespace ReportUnit.Model
                         }
                     }
                 }
-
-                /*var list = _reportList.First().TestSuiteList.SelectMany(ts => ts.TestList);
-                _mergedTests = list.Select(t => new TestInfo(t.Status.ToString())
-                {
-                    Fixture = t.
-                    Name = t.Name,
-                    Message = t.StatusMessage,
-                }).ToList();
-                */
 
                 return _mergedTests.OrderBy(test => test.Statuses.First().Status).ToList();
             }
@@ -91,6 +85,15 @@ namespace ReportUnit.Model
             }
         }
 
+        public TimeSpan OverallTestRunDuration
+        {
+            get
+            {
+                //return new TimeSpan(TestSuiteList.Sum(ts => ts.DurationTime.Ticks));
+                return new TimeSpan(ReportList.Sum(r => r.DurationTime.Ticks));
+            }
+        }
+
         public string SideNavLinks { get; internal set; }
     }
 
@@ -98,6 +101,8 @@ namespace ReportUnit.Model
     {
         public string Fixture { get; set; }
         public string Name { get; set; }
+        public string FullName { get; set; }
+        public string Description { get; set; }
         public List<StatusInfo> Statuses { get; set; }
 
         public TestInfo()

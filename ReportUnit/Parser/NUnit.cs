@@ -144,6 +144,7 @@ namespace ReportUnit.Parser
                     var test = new Model.Test();
 
                     test.Name = tc.Attribute("name").Value;
+                    test.FullName = tc.Attribute("fullname").Value;
                     test.Status = StatusExtensions.ToStatus(tc.Attribute("result").Value);
                     
                     // main a master list of all status

@@ -55,21 +55,18 @@ namespace ReportUnit
                 }
             }
 
-            if (compositeTemplate.ReportList.Count > 1)
-            {
-                compositeTemplate.SideNavLinks = compositeTemplate.SideNavLinks.Insert(0, Templates.SideNav.IndexLink);
-                compositeTemplate.SideNavLinks = compositeTemplate.SideNavLinks.Insert(0, Templates.SideNav.SummaryLink);
 
-                string index = Engine.Razor.RunCompile(Templates.Summary.GetSource(), "index", typeof(Model.CompositeTemplate), compositeTemplate, null);
-                File.WriteAllText(Path.Combine(outputDirectory, "Index.ejs"), index);
-                //compositeTemplate.ReportList.SelectMany(result => result.TestSuiteList,
-                //                                                           (report, testResult) => new {
-                //                                                               report.FileName,
-                //                                                               testResult.Status
-                //                                                           });
-                string summary = Engine.Razor.RunCompile(Templates.Reports.GetSource(), "summary", typeof(CompositeTemplate), compositeTemplate);
-                File.WriteAllText(Path.Combine(outputDirectory, "Summary.ejs"), summary);
-            }
+            compositeTemplate.SideNavLinks = compositeTemplate.SideNavLinks.Insert(0, Templates.SideNav.TimeAnalytics);
+            compositeTemplate.SideNavLinks = compositeTemplate.SideNavLinks.Insert(0, Templates.SideNav.IndexLink);
+            compositeTemplate.SideNavLinks = compositeTemplate.SideNavLinks.Insert(0, Templates.SideNav.SummaryLink);
+
+            string index = Engine.Razor.RunCompile(Templates.Summary.GetSource(), "index", typeof(Model.CompositeTemplate), compositeTemplate, null);
+            File.WriteAllText(Path.Combine(outputDirectory, "Index.ejs"), index);
+            string summary = Engine.Razor.RunCompile(Templates.TemplateManager.GetReportsTemplate(), "summary", typeof(CompositeTemplate), compositeTemplate);
+            File.WriteAllText(Path.Combine(outputDirectory, "Summary.ejs"), summary);
+
+            string timeAnalytics = Engine.Razor.RunCompile(Templates.TemplateManager.GetTimeAnalyticsTemplate(), "timeAnalytics", typeof(CompositeTemplate), compositeTemplate);
+            File.WriteAllText(Path.Combine(outputDirectory, "timeAnalytics.ejs"), timeAnalytics);
 
 			foreach (var report in compositeTemplate.ReportList)
             {

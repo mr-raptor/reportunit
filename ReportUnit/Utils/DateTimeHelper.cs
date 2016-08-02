@@ -21,5 +21,10 @@
 
             return 0;
         }
+
+        public static DateTime ParseDate(string dateTime)
+        {
+            return DateTime.ParseExact(dateTime, "yyyy-MM-dd HH:mm:ssZ", System.Globalization.CultureInfo.InvariantCulture);
+        }
     }
 }

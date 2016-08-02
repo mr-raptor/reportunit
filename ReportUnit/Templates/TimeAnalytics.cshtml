@@ -1,0 +1,106 @@
+﻿@using ReportUnit.Model
+@model CompositeTemplate
+
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='description' content=''>
+    <meta name='author' content=''>
+    <title>ReportUnit TestRunner Report</title>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <link href='https://cdn.rawgit.com/reportunit/reportunit/005dcf934c5a53e60b9ec88a2a118930b433c453/cdn/reportunit.css' type='text/css' rel='stylesheet' />
+
+</head>
+<body class='summary'>
+    <div class='header'>
+        <nav>
+            <ul id='slide-out' class='side-nav fixed'>
+                @Model.SideNavLinks
+            </ul>
+
+            <span class='file-name'>Executive Summary</span>
+
+            <ul class='left'>
+                <li class='logo'>
+                    <a href='/results'><span>← To Results</span></a>
+                </li>
+            </ul>
+
+            <div class='right hide-on-med-and-down nav-right'>
+                <div class='nav-item'>
+                    v1.50.0
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class='main'>
+        <div class='main-wrap'>
+            <div class='row'>
+                <div class='col s12'>
+                    <div class='card-panel report-list no-margin-v'>
+                        @{ var Report = Model.ReportList.First(); }
+
+                        <h5>Overall Test-Run Duration: @Model.OverallTestRunDuration</h5>
+
+                        <table class='table bordered'>
+                            <thead>
+                                <tr>
+                                    <th>Phase</th>
+                                    <th>Duration</th>
+                                    <th>Sum of Fixtures (without Parallelization)</th>
+                                    <th>Parallelization Ratio</th>
+                                </tr>
+                            </thead>
+                            @{ var i = 1; }
+                            <tbody>
+                                @foreach (var phase in Model.ReportList)
+                                {
+                                    <tr>
+                                        <td>Phase @(i++)</td>
+                                        <td>@phase.DurationTime</td>
+                                        <td>@phase.OverallFixturesDuration</td>
+                                        <td>@phase.ParallelRatio.ToString("0.####")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        <h6>Phase 1 Fixtures by Duration:</h6>
+                        <table class='table bordered'>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Fixture</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </thead>
+                            @{ i = 1; }
+                            <tbody>
+                                @foreach (var testSuite in Report.TestSuiteList.OrderByDescending(ts => ts.DurationTime))
+                                {
+                                    <tr>
+                                        <td>@(i++)</td>
+                                        <td class="name">@testSuite.Name</td>
+                                        <td>@testSuite.DurationTime</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/js/materialize.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+<script src='/js/reportunit.js' type='text/javascript'></script>
+
+</html>

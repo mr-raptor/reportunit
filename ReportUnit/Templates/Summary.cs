@@ -46,7 +46,7 @@ namespace ReportUnit.Templates
 
                             <ul class='left'>
                                 <li class='logo'>
-                                    <a href='http://reportunit.relevantcodes.com/'><span>ReportUnit</span></a>
+                                    <a href='/results'><span>← To Results</span></a>
                                 </li>
                             </ul>
 

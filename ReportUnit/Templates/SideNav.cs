@@ -40,5 +40,18 @@
                     </li>".Replace("\r\n", "").Replace("\t", "").Replace("    ", "");
             }
         }
+
+        public static string TimeAnalytics
+        {
+            get
+            {
+                return @"<li class='waves-effect report-item'>
+	                    <a href='./TimeAnalytics'>
+		                    <i class='mdi-action-assignment'></i>
+		                    <span class='sidenav-filename'>Time Analytics</span>
+	                    </a>
+                    </li>".Replace("\r\n", "").Replace("\t", "").Replace("    ", "");
+            }
+        }
     }
 }

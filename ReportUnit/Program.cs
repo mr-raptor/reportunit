@@ -47,7 +47,7 @@ namespace ReportUnit
 
             if (args.Length == 0 || args.Length > 2)
             {
-                args = new string[] { "C:/cygwin64/home/Admin/testrunner/testResultsXml", "C:/cygwin64/home/Admin/testrunner/views/testResults" };
+                args = new string[] { @"C:\cygwin64\home\Admin\testrunner\views\testResults\Result-Mon-Mar-14-2016-17-46-37\xml", @"C:\cygwin64\home\Admin\testrunner\views\testResults\Result-Mon-Mar-14-2016-17-46-37\html" };
             }
 
             foreach (string arg in args)

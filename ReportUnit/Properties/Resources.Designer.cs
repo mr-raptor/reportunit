@@ -69,5 +69,15 @@ namespace ReportUnit.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] TimeAnalytics {
+            get {
+                object obj = ResourceManager.GetObject("TimeAnalytics", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

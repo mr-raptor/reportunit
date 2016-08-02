@@ -34,6 +34,14 @@ namespace ReportUnit.Model
         /// </summary>
         public double Duration { get; set; }
 
+        public TimeSpan DurationTime
+        {
+            get
+            {
+                return new TimeSpan(TestList.Sum(test => test.DurationTime.Ticks));
+            }
+        }
+
         public List<Test> TestList { get; private set; }
     }
 }

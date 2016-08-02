@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 using ReportUnit.Parser;
+using ReportUnit.Support;
 
 namespace ReportUnit.Model
 {
@@ -53,6 +54,33 @@ namespace ReportUnit.Model
         /// </summary>
         public double Duration { get; set; }
 
+        public TimeSpan DurationTime
+        {
+            get
+            {
+                DateTime startTime = DateTimeHelper.ParseDate(StartTime);
+                DateTime endTime = DateTimeHelper.ParseDate(EndTime);
+                return (endTime - startTime);
+            }
+        }
+
+        public TimeSpan OverallFixturesDuration
+        {
+            get
+            {
+                return new TimeSpan(TestSuiteList.Sum(ts => ts.DurationTime.Ticks));
+            }
+        }
+
+        public double ParallelRatio
+        {
+            get
+            {
+                return OverallFixturesDuration.TotalSeconds/DurationTime.TotalSeconds;
+            }
+        }
+
+
         /// <summary>
         /// Total number of tests run
         /// </summary>
@@ -69,6 +97,14 @@ namespace ReportUnit.Model
         public double Errors { get; set; }
 
         public string SideNavLinks { get; set; }
+
+        public double SuccessRate
+        {
+            get
+            {
+                return (Passed / Total) * 100;
+            }
+        }
 
         public Report()
         {

@@ -47,7 +47,7 @@ namespace ReportUnit.Templates
                             
                             <ul class='left'>
                                 <li class='logo'>
-                                    <a href='http://reportunit.relevantcodes.com/'><span>ReportUnit</span></a>
+                                    <a href='/results'><span>← To Results</span></a>
                                 </li>
                             </ul>
 
@@ -187,6 +187,8 @@ namespace ReportUnit.Templates
                                                             {
                                                                 <span alt='Suite ended at time' title='Suite ended at time' class='endedAt label label red lighten-2 text-white'>@Model.TestSuiteList[ix].EndTime</span>
                                                             }
+                                                            <br>
+                                                            <span><b>Fixture Duration: @Model.TestSuiteList[ix].DurationTime</b></span>
                                                             <div class='fixture-status-message'>
                                                                 @if (!String.IsNullOrEmpty(@Model.TestSuiteList[ix].Description)) 
                                                                 {
@@ -206,7 +208,7 @@ namespace ReportUnit.Templates
                                                                         {
                                                                             <th>Category</th>
                                                                         }
-                                                                        @if (Model.TestSuiteList.Count > 0 && Model.TestSuiteList[ix].TestList.Where(x => !String.IsNullOrEmpty(x.Description) || !String.IsNullOrEmpty(x.StatusMessage)).Count() > 0) 
+                                                                        @if (Model.TestSuiteList.Count > 0 && Model.TestSuiteList[ix].TestList.Where(x => !String.IsNullOrEmpty(x.StatusMessage)).Count() > 0)
                                                                         {
                                                                             <th>StatusMessage</th>
                                                                         }
@@ -331,7 +333,7 @@ namespace ReportUnit.Templates
                 <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script> 
                 <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/js/materialize.min.js'></script> 
                 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
-                <script src='https://cdn.rawgit.com/reportunit/reportunit/005dcf934c5a53e60b9ec88a2a118930b433c453/cdn/reportunit.js' type='text/javascript'></script>
+                <script src='/js/reportunit.js' type='text/javascript'></script>
 
             </html>
             ".Replace("\r\n", "").Replace("\t", "").Replace("    ", ""); 
